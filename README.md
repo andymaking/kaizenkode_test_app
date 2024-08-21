@@ -4,11 +4,11 @@ A new Flutter project.
 
 ## TO PREVIEW THE APP ON YOUR BROWSER
 Just click on the link below
-[APPETIZE]([https://appetize.io/app/b_hphabh4gtxuwcuvuucbkz7r65q](https://appetize.io/app/b_aoffto7unev3dnegewuuwam4k4))
+[APPETIZE](https://appetize.io/app/b_aoffto7unev3dnegewuuwam4k4)
 
 ## TO VIEW REPOSITORY
 [GITHUB](https://github.com/andymaking/kaizenkode_test_app)
 
 ## DOWNLOAD THE APK
 Just click on the link below to download the App
-[SHOPTIME APK (GOOGLE DRIVE)]([https://drive.google.com/file/d/1Fb0CmkYf0_-2JQKm8GrE0avJFVdoAXcG/view?usp=sharing](https://drive.google.com/drive/folders/1mu_Cb8OLcu-cgqInLgugLM_N9_dnoo6f?usp=sharing))
+[SHOPTIME APK (GOOGLE DRIVE)](https://drive.google.com/drive/folders/1mu_Cb8OLcu-cgqInLgugLM_N9_dnoo6f?usp=sharing)
