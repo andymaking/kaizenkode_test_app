@@ -18,6 +18,7 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final dashBoardStateProvider = ref.watch(dashBoardProvider);
+    final dashProvider = ref.watch(dashBoardProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
@@ -72,12 +73,14 @@ class HomeScreen extends ConsumerWidget {
               child: TabBarView(
                 children: [
                   FeedScreen(
-                    posts: dashBoardStateProvider.publicPosts,
+                    posts: dashBoardStateProvider.displayPublicPosts,
                     topic: dashBoardStateProvider.publicTopics,
+                    filter: ()=> dashProvider.showFilterSheet(context, true),
                   ),
                   FeedScreen(
-                    posts: dashBoardStateProvider.businessPosts,
+                    posts: dashBoardStateProvider.displayBusinessPosts,
                     topic: dashBoardStateProvider.businessTopics,
+                    filter: ()=> dashProvider.showFilterSheet(context, false),
                   ),
                 ],
               )

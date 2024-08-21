@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kaizenkode_test_app/feature/home/widgets/topic_selector.dart';
+import 'package:kaizenkode_test_app/utils/app_buttom_sheet.dart';
 
 import '../model/post_model.dart';
 
@@ -8,13 +11,19 @@ class DashBoardState {
   final bool isLoading;
   final List<PostModel> publicPosts;
   final List<PostModel> businessPosts;
+  final List<PostModel> displayBusinessPosts;
+  final List<PostModel> displayPublicPosts;
   final List<String> businessTopics;
+  final List<String> allTopics;
   final List<String> publicTopics;
 
   DashBoardState({
     required this.isLoading,
     required this.publicPosts,
     required this.businessPosts,
+    required this.displayBusinessPosts,
+    required this.displayPublicPosts,
+    required this.allTopics,
     required this.businessTopics,
     required this.publicTopics,
   });
@@ -23,6 +32,9 @@ class DashBoardState {
     bool? isLoading,
     List<PostModel>? publicPosts,
     List<PostModel>? businessPosts,
+    List<PostModel>? displayPublicPosts,
+    List<PostModel>? displayBusinessPosts,
+    List<String>? allTopics,
     List<String>? businessTopics,
     List<String>? publicTopics,
   }) {
@@ -30,6 +42,9 @@ class DashBoardState {
       isLoading: isLoading ?? this.isLoading,
       publicPosts: publicPosts ?? this.publicPosts,
       businessPosts: businessPosts ?? this.businessPosts,
+      displayBusinessPosts: displayBusinessPosts ?? this.displayBusinessPosts,
+      displayPublicPosts: displayPublicPosts ?? this.displayPublicPosts,
+      allTopics: allTopics ?? this.allTopics,
       publicTopics: publicTopics ?? this.publicTopics,
       businessTopics: businessTopics ?? this.businessTopics,
     );
@@ -43,6 +58,9 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     isLoading: false,
     publicPosts: [],
     businessPosts: [],
+    displayPublicPosts: [],
+    displayBusinessPosts: [],
+    allTopics: [],
     businessTopics: [],
     publicTopics: [],
   )
@@ -63,23 +81,77 @@ class DashBoardProvider extends StateNotifier<DashBoardState> {
     state = state.copyWith(businessPosts: value);
   }
 
+  set setDisplayPublicPost(List<PostModel> value) {
+    state = state.copyWith(displayPublicPosts: value);
+  }
+
+  set setDisplayBusinessPost(List<PostModel> value) {
+    state = state.copyWith(displayBusinessPosts: value);
+  }
+
   set setBusinessTopic(List<String> value) {
     state = state.copyWith(businessTopics: value);
+  }
+
+  set setAllTopic(List<String> value) {
+    state = state.copyWith(allTopics: value);
   }
 
   set setPublicTopic(List<String> value) {
     state = state.copyWith(publicTopics: value);
   }
 
+  selectPublicTopic(String topic){
+    if(selectedPublicTopic== topic){
+      selectedPublicTopic = null;
+      setDisplayPublicPost = state.publicPosts;
+    }else{
+      selectedPublicTopic = topic;
+      List<PostModel> pp = state.publicPosts.where((e)=> e.topic == topic).toList();
+      setDisplayPublicPost = pp;
+    }
+
+  }
+
+  String? selectedBusinesTopic;
+  String? selectedPublicTopic;
+
+  selectBusinessTopic(String topic){
+    if(selectedBusinesTopic == topic){
+      selectedBusinesTopic = null;
+      setDisplayBusinessPost = state.businessPosts;
+    }else{
+      selectedBusinesTopic = topic;
+      List<PostModel> pp = state.businessPosts.where((e)=> e.topic == topic).toList();
+      setDisplayBusinessPost = pp;
+    }
+  }
+
+  showFilterSheet(BuildContext context, bool isPublic){
+    appBottomSheet(
+      ratio: (304/812), 
+      child: TopicSelector(
+        onSelect: isPublic? selectPublicTopic : selectBusinessTopic,
+        topics: isPublic? state.publicTopics : state.businessTopics,
+        selectedTopics: isPublic? selectedPublicTopic: selectedBusinesTopic,
+      ),
+      context: context
+    );
+  }
+
   Future<void> _initializeDashboardData() async {
     List<PostModel> public = posts.where((e)=> e.isPublic == true).toList();
     List<PostModel> business = posts.where((e)=> e.isPublic != true).toList();
+    List<String> all = getUniqueTopics(posts);
     List<String> bTopicList = getUniqueTopics(business);
     List<String> pTopicList = getUniqueTopics(public);
     setBusinessPost = business;
+    setDisplayBusinessPost = business;
     setPublicPost = public;
+    setDisplayPublicPost = public;
     setPublicTopic = pTopicList;
     setBusinessTopic = bTopicList;
+    setAllTopic = all;
   }
 
   List<String> getUniqueTopics(List<PostModel> posts) {
