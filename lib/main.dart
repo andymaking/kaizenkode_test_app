@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kaizenkode_test_app/data/cache/palette.dart';
 
 import 'data/routes/app_routers.dart';
+import 'data/services/navigation.service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp.router(
-          title: 'Flutter Demo',
+          title: 'Test App',
           theme: ThemeData(
             primaryColor: AppColors.primaryColor,
             colorScheme: ColorScheme.fromSeed(
@@ -47,6 +48,16 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
             scaffoldBackgroundColor: Colors.white,
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primaryColor,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.r)
+                ),
+                elevation: 0.2
+              )
+            ),
             appBarTheme: AppBarTheme(
               backgroundColor: Colors.transparent,
               scrolledUnderElevation: 0,

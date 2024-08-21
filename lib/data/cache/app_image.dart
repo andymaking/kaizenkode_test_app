@@ -20,5 +20,7 @@ class AppImages {
   static const String profileIcon = 'assets/svg/ic_profile.svg';
   static const String addImage = 'assets/svg/add_circle.svg';
   static const String sendMessage = 'assets/svg/bxs_send.svg';
+  static const String close = 'assets/svg/close.svg';
+  static const String topic = 'assets/svg/topic.svg';
   static const String verificationBadge = 'assets/svg/verify.svg';
 }

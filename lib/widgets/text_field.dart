@@ -209,6 +209,7 @@ class TextArea extends StatelessWidget {
   final Function(String)? onChanged;
   final int? maxLength;
   final bool? enabled;
+  final bool autoFocus;
   final InputBorder? border;
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
@@ -254,6 +255,7 @@ class TextArea extends StatelessWidget {
     this.readOnly = false,
     this.labelRightItem,
     this.labelStyle, this.show,
+    this.autoFocus = false,
   });
 
   @override
@@ -281,7 +283,8 @@ class TextArea extends StatelessWidget {
           controller: controller,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            fillColor: show==null?Theme.of(context).dividerColor.withOpacity(0.07):Colors.transparent,
+            fillColor: Colors.transparent,
+            contentPadding: 0.0.padA,
             counterText: '',
             hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 13, color: hintColor),
             isDense: true,
@@ -295,6 +298,7 @@ class TextArea extends StatelessWidget {
           textAlign: textAlign ?? TextAlign.start,
           inputFormatters: inputFormatters,
           keyboardType: keyBoardType,
+          autofocus: autoFocus,
           onChanged: onChanged,
           onEditingComplete: onEdittingComplete,
           obscureText: obscureText ?? false,

@@ -14,6 +14,7 @@ class AppText extends StatelessWidget {
   final int? maxLine;
   final String? family;
   final bool? isBold;
+  final bool isNino;
   final FontStyle fontStyle;
   final bool? isHeader;
   final bool? isSubHeader;
@@ -29,6 +30,7 @@ class AppText extends StatelessWidget {
       this.color,
       this.overflow,
       this.size,
+      this.isNino = false,
       this.weight,
       this.align,
       this.maxLine,
@@ -39,7 +41,8 @@ class AppText extends StatelessWidget {
       this.isBold,
       this.isHeader,
       this.isSubHeader,
-      this.decoration, this.fontStyle = FontStyle.normal
+      this.decoration,
+      this.fontStyle = FontStyle.normal
     }) : super(key: key);
 
   @override
@@ -47,14 +50,21 @@ class AppText extends StatelessWidget {
 
     return Text(
       text,
-      style: style ?? GoogleFonts.manrope(
+      style: style ?? (isNino? GoogleFonts.nunito(
         color: isHeader==true? AppColors.textColor: isSubHeader==true? AppColors.secondaryTextColor : color,
         fontSize: size ?? 14.sp,
         height: height,
         decoration: decoration,
         fontStyle: fontStyle,
         fontWeight: weight ?? (isBold == true ? FontWeight.w700 : isSubHeader==true? FontWeight.w500: FontWeight.w400)
-      ),
+      ): GoogleFonts.manrope(
+        color: isHeader==true? AppColors.textColor: isSubHeader==true? AppColors.secondaryTextColor : color,
+        fontSize: size ?? 14.sp,
+        height: height,
+        decoration: decoration,
+        fontStyle: fontStyle,
+        fontWeight: weight ?? (isBold == true ? FontWeight.w700 : isSubHeader==true? FontWeight.w500: FontWeight.w400)
+      )),
       textAlign: align ?? TextAlign.start,
       selectionColor: AppColors.primaryColor.withOpacity(0.2),
       maxLines: maxLine,

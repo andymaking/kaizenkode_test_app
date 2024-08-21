@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../feature/bottom_navigation/bottom_navigation.dart';
 import '../../feature/chat_details/chat_detail_screen.dart';
 import '../../feature/chat_home/screen/chat_home_page.dart';
+import '../../feature/create_post/screens/create_post_ui.dart';
 import '../../feature/home/screens/home_screen.dart';
 import '../../feature/splash/splash_screen.dart';
 import 'consumer_go_router.dart';
@@ -22,11 +23,7 @@ class AppRouter {
       ),
       GoRoute(
         path: AppRoute.createPost,
-        builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: Text("Create Post"),
-          ),
-        ),
+        builder: (context, state) => const CreatePostScreen(),
       ),
       GoRoute(
         path: AppRoute.chatDetails,

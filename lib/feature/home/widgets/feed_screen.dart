@@ -15,13 +15,17 @@ import '../model/post_model.dart';
 class FeedScreen extends StatelessWidget {
   final List<PostModel> posts;
   final List<String> topic;
-  const FeedScreen({super.key, required this.posts, required this.topic});
+  final VoidCallback filter;
+  const FeedScreen({super.key, required this.posts, required this.topic, required this.filter});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.sp),
-      child: ListView(
+      child: posts.isEmpty ? Center(
+        child: AppText("No post available", size: 16.sp,),
+      ):
+      ListView(
         padding: EdgeInsets.only(top: 16.h),
         children: [
           Row(
@@ -32,10 +36,13 @@ class FeedScreen extends StatelessWidget {
                 isBold: true,
                 size: 20.sp,
               ),
-              SvgPicture.asset(
-                AppImages.filter,
-                height: 30.h,
-                width: 30.w,
+              InkWell(
+                onTap: filter,
+                child: SvgPicture.asset(
+                  AppImages.filter,
+                  height: 30.h,
+                  width: 30.w,
+                ),
               )
             ],
           ),
@@ -110,13 +117,20 @@ class FeedScreen extends StatelessWidget {
                       Padding(
                         padding: 16.w.padA,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(AppImages.fav, height: 20.h, width: 20.w,),
-                            16.w.sbW,
-                            SvgPicture.asset(AppImages.message, height: 20.h, width: 20.w,),
-                            16.w.sbW,
-                            SvgPicture.asset(AppImages.send, height: 20.h, width: 20.w,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset(AppImages.fav, height: 20.h, width: 20.w,),
+                                16.w.sbW,
+                                SvgPicture.asset(AppImages.message, height: 20.h, width: 20.w,),
+                                16.w.sbW,
+                                SvgPicture.asset(AppImages.send, height: 20.h, width: 20.w,),
+                              ],
+                            ),
+                            SvgPicture.asset(AppImages.bookmark, height: 20.h, width: 20.w,),
                           ],
                         ),
                       ),
