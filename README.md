@@ -11,4 +11,4 @@ Just click on the link below
 
 ## DOWNLOAD THE APK
 Just click on the link below to download the App
-[SHOPTIME APK (GOOGLE DRIVE)](https://drive.google.com/drive/folders/1mu_Cb8OLcu-cgqInLgugLM_N9_dnoo6f?usp=sharing)
+[APK (GOOGLE DRIVE)](https://drive.google.com/drive/folders/1mu_Cb8OLcu-cgqInLgugLM_N9_dnoo6f?usp=sharing)
